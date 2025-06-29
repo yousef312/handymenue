@@ -1,0 +1,195 @@
+.handy-menu {
+  position: fixed;
+  display: none;
+  background-color: rgb(247 247 247);
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  overflow: hidden;
+  width: 250px;
+  padding: 0 2px;
+  z-index: 500;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 7%);
+}
+
+.handy-untouchable {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  display: none;
+}
+
+.handy-menu:focus {
+  outline: none;
+}
+
+/* shared button style */
+.handy-menu-item {
+  height: 30px;
+}
+
+/* separator item design  */
+.handy-menu-item.separator {
+  height: fit-content;
+  border-top: 1px solid #d5d5d5;
+  padding: 0px;
+  margin: 5px;
+  text-align: center;
+  font-size: 0.8em;
+  color: gray;
+  background-color: #80808008;
+}
+
+/* title item style */
+.handy-menu-item.title {
+  text-align: center;
+  height: fit-content;
+}
+
+.handy-menu-item:not(.separator, .title) {
+  border-radius: 5px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  transition: all 0.2s;
+}
+.handy-menu-item:not(.separator, .handy-slider, .title):hover {
+  background-color: rgb(231, 231, 231);
+}
+
+.handy-menu-item:not(.separator, .title) > div:not(:first-child, :last-child) {
+  flex: 1 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Head part of menu item */
+.handy-menu-item:not(.separator) > div:first-child,
+.handy-menu-item:not(.separator) > div:last-child {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+/* button first part */
+.handy-menu-item:not(.separator) > div:first-child {
+  background-position: center;
+  background-size: calc(100% - 10px);
+  background-repeat: no-repeat;
+}
+/* button main label */
+.handy-menu-item:not(.separator) > div:nth-child(2) > div:first-child {
+}
+/* button accelerator label */
+.handy-menu-item:not(.separator) > div:nth-child(2) > div:last-child {
+  color: gray;
+  font-size: 0.9em;
+  float: right;
+}
+
+.handy-menu-item-arrow {
+  width: 8px;
+  height: 8px;
+  border-right: 1px solid gray;
+  border-top: 1px solid gray;
+  rotate: 45deg;
+}
+
+.handy-check-box-mark {
+  width: 11px;
+  height: 6px;
+  border-bottom: 2px solid gray;
+  border-left: 2px solid gray;
+  rotate: -51deg;
+  transform: translateY(-3px);
+}
+
+.handy-radio-button-mark {
+  width: 5px;
+  height: 5px;
+  border-radius: 5px;
+  background-color: gray;
+}
+
+.unselect {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+}
+
+.handy-menu .handy-slider-btns {
+  display: flex;
+  flex-direction: row;
+  gap: 2px;
+  height: 25px;
+  line-height: 25px;
+}
+
+.handy-menu .handy-slider-btn {
+  width: 25px;
+  height: 25px;
+  border-radius: 3px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s;
+}
+
+.handy-menu .handy-slider-btn:hover {
+  background-color: #cacaca;
+}
+
+.handy-menu .handy-slider-btn > div {
+  background-color: #1045ab;
+}
+
+.handy-menu .handy-slider-show {
+  width: 45px;
+  text-align: center;
+  color: #1045ab;
+}
+
+.handy-minus {
+  background-color: white;
+  width: 13px;
+  height: 2px;
+  border-radius: 2px;
+}
+
+.handy-plus1 {
+  width: 14px;
+  height: 2px;
+  border-radius: 2px;
+  margin-left: -5px;
+}
+
+.handy-plus2 {
+  width: 2px;
+  height: 14px;
+  margin-left: -8px;
+  border-radius: 2px;
+}
+
+.handy-definition-box {
+  position: fixed;
+  display: none;
+  background-color: rgb(247 247 247);
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  overflow: hidden;
+  width: 200px;
+  padding: 10px;
+  z-index: 500;
+  box-shadow: 0 5px 10px rgb(0 0 0 / 7%);
+  font-size: 0.8em;
+  box-sizing: border-box;
+}
