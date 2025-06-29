@@ -1,6 +1,6 @@
 {
   "name": "handymenuejs",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "a library that create and manage contextmenu with ease",
   "main": "./src/handymenue.js",
   "module": "dist/handymenue.esm.js",
