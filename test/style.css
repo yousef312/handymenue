@@ -1,4 +1,4 @@
-.handy-menu {
+.handyMenu {
   position: fixed;
   display: none;
   background-color: rgb(247 247 247);
@@ -21,17 +21,17 @@
   display: none;
 }
 
-.handy-menu:focus {
+.handyMenu:focus {
   outline: none;
 }
 
 /* shared button style */
-.handy-menu-item {
+.handyMenuItem {
   height: 30px;
 }
 
 /* separator item design  */
-.handy-menu-item.separator {
+.handyMenuItem.separator {
   height: fit-content;
   border-top: 1px solid #d5d5d5;
   padding: 0px;
@@ -43,12 +43,12 @@
 }
 
 /* title item style */
-.handy-menu-item.title {
+.handyMenuItem.title {
   text-align: center;
   height: fit-content;
 }
 
-.handy-menu-item:not(.separator, .title) {
+.handyMenuItem:not(.separator, .title) {
   border-radius: 5px;
   cursor: pointer;
   display: flex;
@@ -56,11 +56,11 @@
   align-items: center;
   transition: all 0.2s;
 }
-.handy-menu-item:not(.separator, .handy-slider, .title):hover {
+.handyMenuItem:not(.separator, .handy-slider, .title):hover {
   background-color: rgb(231, 231, 231);
 }
 
-.handy-menu-item:not(.separator, .title) > div:not(:first-child, :last-child) {
+.handyMenuItem:not(.separator, .title) > div:not(:first-child, :last-child) {
   flex: 1 0;
   display: flex;
   flex-direction: row;
@@ -69,8 +69,8 @@
 }
 
 /* Head part of menu item */
-.handy-menu-item:not(.separator) > div:first-child,
-.handy-menu-item:not(.separator) > div:last-child {
+.handyMenuItem:not(.separator) > div:first-child,
+.handyMenuItem:not(.separator) > div:last-child {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -78,22 +78,22 @@
 }
 
 /* button first part */
-.handy-menu-item:not(.separator) > div:first-child {
+.handyMenuItem:not(.separator) > div:first-child {
   background-position: center;
   background-size: calc(100% - 10px);
   background-repeat: no-repeat;
 }
 /* button main label */
-.handy-menu-item:not(.separator) > div:nth-child(2) > div:first-child {
+.handyMenuItem:not(.separator) > div:nth-child(2) > div:first-child {
 }
 /* button accelerator label */
-.handy-menu-item:not(.separator) > div:nth-child(2) > div:last-child {
+.handyMenuItem:not(.separator) > div:nth-child(2) > div:last-child {
   color: gray;
   font-size: 0.9em;
   float: right;
 }
 
-.handy-menu-item-arrow {
+.handyMenuItem-arrow {
   width: 8px;
   height: 8px;
   border-right: 1px solid gray;
@@ -124,7 +124,7 @@
   -webkit-user-select: none;
 }
 
-.handy-menu .handy-slider-btns {
+.handyMenu .handy-slider-btns {
   display: flex;
   flex-direction: row;
   gap: 2px;
@@ -132,7 +132,7 @@
   line-height: 25px;
 }
 
-.handy-menu .handy-slider-btn {
+.handyMenu .handy-slider-btn {
   width: 25px;
   height: 25px;
   border-radius: 3px;
@@ -143,15 +143,15 @@
   transition: all 0.2s;
 }
 
-.handy-menu .handy-slider-btn:hover {
+.handyMenu .handy-slider-btn:hover {
   background-color: #cacaca;
 }
 
-.handy-menu .handy-slider-btn > div {
+.handyMenu .handy-slider-btn > div {
   background-color: #1045ab;
 }
 
-.handy-menu .handy-slider-show {
+.handyMenu .handy-slider-show {
   width: 45px;
   text-align: center;
   color: #1045ab;

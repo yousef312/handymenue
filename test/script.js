@@ -1,4 +1,4 @@
-import handy from "./HandyMenue.js";
+import handy from "./handymenue.js";
 
 const template = [
   {
@@ -191,3 +191,6 @@ const props = {
 };
 
 let menu = handy(template, props);
+
+
+menu.setLabel(2,"don't look at me")
