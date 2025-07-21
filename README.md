@@ -1,6 +1,12 @@
-# HandyMenueJs
+# Jmenu.js
+Quick nice fancy menues for your little app!
 
-a library which handle creating, interact and managing context menu with ease
+yeap that's me! [@yousef_neji](https://github.com/yousef312)
+
+## CHANGELOG
+
+Check changelog for more informations
+[check](/changelog)
 
 ## What does we offer?
 
@@ -17,7 +23,7 @@ and soon(still working on)
 ## Installation
 
 ```shell
-npm install handymenuejs
+npm install jmenu
 ```
 
 ## Usage
@@ -26,8 +32,8 @@ Our library uses css, we included a `style.css` file in the test folder, make su
 
 ```javascript
 // load the library
-const handy = require("handymenuejs");
-import handy from "handymenuejs";
+const Jmenu = require("jmenu");
+import Jmenu from "jmenu";
 
 /*
  * Define your menu template
@@ -66,17 +72,33 @@ var template = [
 ];
 // some properties of your menu
 var props = {
-  id: "myhandymenue", // set an id to the menu
+  id: "jmenu_", // set an id to the menu
   spacing: 30, // define spacing in fron and back of the buttons
   bars: 5, // define some space in top and bottom of menu
-  target: menuLauncher, // a html element responsible for the popup of the menu, `window` object by default
+  target: menuLauncher, // a html element responsible for the popup of the menu, `window` object by default or a selector string
   action: "contextmenu", // the event responsible for the popup of the menu, `contextmenu` by default
+  alignToTarget: true | "left" | "right", // you can fix the menu placement next to the target button
+  alignToOffset: 2, // this will shift/offset the menu position with certain pixels, when using alignToTarget
   ....
   //....
 };
 
 // the creation
-var handy = handy(template, props);
+var menu = new Jmenu(template, props);
+
+```
+
+ - You can modify elements on the fly by
+
+```javascript
+
+// hide a button
+menu.hideButton(index);
+
+// show it back again
+menu.showButton(index);
+
+menu.
 
 ```
 

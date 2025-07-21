@@ -4,28 +4,28 @@ import terser from '@rollup/plugin-terser';
 
 export default [
   {
-    input: 'src/HandyMenue.js',
+    input: 'src/jmenu.js',
     output: [
       {
-        file: 'dist/HandyMenue.umd.js',
+        file: 'dist/jmenu.umd.js',
         format: 'umd',
-        name: 'HandyMenue',
+        name: 'jmenu',
         sourcemap: true,
       },
       {
-        file: 'dist/HandyMenue.umd.min.js',
+        file: 'dist/jmenu.umd.min.js',
         format: 'umd',
-        name: 'HandyMenue',
+        name: 'jmenu',
         plugins: [terser()],
         sourcemap: true,
       },
       {
-        file: 'dist/HandyMenue.esm.js',
+        file: 'dist/jmenu.esm.js',
         format: 'es',
         sourcemap: true,
       },
       {
-        file: 'dist/HandyMenue.cjs.js',
+        file: 'dist/jmenu.cjs.js',
         format: 'cjs',
         sourcemap: true,
       }

@@ -1,20 +1,20 @@
 {
-  "name": "handymenuejs",
+  "name": "jmenu",
   "version": "2.0.1",
   "description": "a library that create and manage contextmenu with ease",
-  "main": "./src/handymenue.js",
-  "module": "dist/handymenue.esm.js",
-  "browser": "dist/handymenue.umd.min.js",
+  "main": "./src/jmenu.js",
+  "module": "dist/jmenu.esm.js",
+  "browser": "dist/jmenu.umd.min.js",
   "exports": {
-    "import": "./dist/handymenue.esm.js",
-    "require": "./dist/handymenue.cjs.js"
+    "import": "./dist/jmenu.esm.js",
+    "require": "./dist/jmenu.cjs.js"
   },
   "scripts": {
     "build": "rollup -c"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yousef312/HandyMenueJs.git"
+    "url": "git+https://github.com/yousef312/jmenu.git"
   },
   "keywords": [
     "context",
@@ -35,9 +35,9 @@
   "author": "Yousef Neji <ynajy2200@gmail.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/yousef312/HandyMenueJs/issues"
+    "url": "https://github.com/yousef312/jmenu/issues"
   },
-  "homepage": "https://github.com/yousef312/HandyMenueJs#readme",
+  "homepage": "https://github.com/yousef312/jmenu#readme",
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.5",
     "@rollup/plugin-node-resolve": "^16.0.1",
@@ -45,7 +45,6 @@
     "rollup": "^4.43.0"
   },
   "dependencies": {
-    "eyeejs": "^5.0.0",
-    "qway": "^3.2.0"
+    "eyeejs": "^5.0.0"
   }
 }

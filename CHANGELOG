@@ -1,0 +1,24 @@
+
+# CHANGELOG
+
+
+## [3.0.0] - 2025-07-21
+
+### Changed
+
+ - the library name officially changed to Jmenu.
+ - the library returns class instead function now, so instead of let menu = handy(...) => let menu = new Jmenu();
+ - `target` atttribute when creating a new menu, may accept a text selector for custom element groupe.
+ - `stickto` attribute replace by two new attributes `alignToTarget` which may take boolean | "left" or | "right", and `alignToOffset` may take a number to offset alignment.
+ - qway dependencies removed.
+ - `.toggleButton` remove and replace by two separated `.enableButton` and `.disableButton`
+
+### Added
+
+ - new `.on` function to listen to event
+ - new `.off` function to remove event listeners
+ - new `.trigger` function to trigger events
+ - interducing basic events trigger through out the system, `open` `close` with JmenuEvent objects
+ - new `.setButtonProp` function to modify button's properties
+ - new `.enableButton` to enable button
+ - new `.disableButton` to disable button
