@@ -1,0 +1,47 @@
+# ChangeLog
+
+## [3.2.0] - 2025/07/20
+
+### Fixed
+
+ - library shows an error when binding single key! Fixed
+ - combo bindings not accepting repeatetive keys(Like two O in C O M B O) Fixed
+ - timed keys not working! Fixed
+ - bindings interrupt inputs and textarea working. Fixed
+ - when disactivating qway, blur window then focus back, the qway is activated! Fixed 
+
+### Added
+
+ - `progress` binding object now have `type` attribute
+ - new `defineTimeoutFunc` function that allows you to use your custom settimeout functions, with `getTimeoutFunc` to get them.
+ - `.activate` and `.disativate` now may accept specific type of bindings to activate/disativate.
+
+### Changed
+
+ - `progress` event now get executed everytime even when binding is executed, also the order is adjusted, action => progressEvent => finishEvent
+
+## [3.1.0] - 2025/07/13
+
+### Fixed
+
+ - the library effects the inputs in the documents Fixed.
+
+## [3.0.0] - 2025/07/13
+
+### Added
+
+- new Event System with custom events passed to handlers
+- new `.isKeyPressed` function to check whether a key is pressed or not
+- new `.reserved` better function to check whether a shortcut is already in use or not
+- new `.find` function that find and return a shortcut with it's callback
+- new `.attached` function to check whether a callback already attached to a shortcut ot not
+
+### Changed
+
+- the entire library now uses ES6 class definition instead of function based classes
+- combo strings devided by spaces no more ",", `C O M B O` old way `C,O,M,B,O`
+- the instantiation of the Qway libraries happens by default and a ready to use object is sent directly.
+
+### Fixed
+
+- error in the accuracy of the shortcut, `ctrl+shift+i` for example will keep executing once performed the first time.

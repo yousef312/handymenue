@@ -83,7 +83,7 @@ const template = [
     func: function (checked) {
       if (checked === true) {
         let coord = eye(
-          "span",
+          "<span>",
           { id: "coords-show", parent: document.body },
           {
             position: "fixed",
@@ -153,6 +153,7 @@ const template = [
     range: [0, 100], //default [0,100]
     step: 2, //default is 2
     format: "_value_%",
+    wheel: true,
     default: 50,
     func: function (volume) {
       console.log("setting volume to .. " + volume);
@@ -193,4 +194,4 @@ const props = {
 let menu = handy(template, props);
 
 
-menu.setLabel(2,"don't look at me")
+// menu.setLabel(2,"don't look at me")

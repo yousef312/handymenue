@@ -1,5 +1,6 @@
-import qway from "./qway/";
-import eye from "eyeejs";
+import qway from "./qway/src/qway.js";
+import eye from "./eyeejs/src/eye.js";
+
 
 // will be set to empty functions
 const hmNoop = () => { };
@@ -7,16 +8,16 @@ let btnsCounter = 0;
 // preparing the Qway functionalities
 
 const templates = {
-  separator: eye("model:separator", {
-    "span: _label": {},
+  separator: eye("model:handy-menu-item separator", {
+    "<span>: _label": {},
   }),
-  normal: eye("model:handyMenuItem", {
-    div: {},
-    div: {
-      "div: _label": {},
-      "div: _accelerator": {},
+  normal: eye("model:handy-menu-item", {
+    "<div>.p1": {},
+    "<div>.p2": {
+      "<div>: _label": {},
+      "<div>: _accelerator": {},
     },
-    div: {},
+    "<div>.p3": {},
   }),
 };
 
@@ -102,9 +103,9 @@ class JButton {
       })
 
       // we will be using this parts later
-      head = btn.child(0);
-      body = btn.child(1);
-      tail = btn.child(2);
+      let head = btn.child(0);
+      let body = btn.child(1);
+      let tail = btn.child(2);
 
       // buttons have some spacing in front 
       let fSpace = Array.isArray(spacing) ? spacing[0] : spacing,
@@ -113,7 +114,7 @@ class JButton {
       // applying some style
       head
         .css("width", `${fSpace}px`)
-        .css("backgroundImage", icon ? `url(${icon})` : "");
+        .css("backgroundImage", this.icon ? `url(${this.icon})` : "");
       tail.css("width", `${lSpace}px`);
 
       let bodyLabel = body.child(0);
@@ -139,9 +140,9 @@ class JButton {
           break;
         case "check-box":
           ///////////////////////////////////// CHECKBOX
-          label = Array.isArray(this.label) ? this.label : [this.label, this.label];
+          let label = Array.isArray(this.label) ? this.label : [this.label, this.label];
           bodyLabel.text(label[0]);
-          checkBoxMark = eye("div", { class: "handy-check-box-mark" });
+          let checkBoxMark = eye("<div>", { class: "handy-check-box-mark" });
 
           // defining a variable
           this.selected = false;
@@ -169,14 +170,14 @@ class JButton {
             );
           if (!this.menu.radios[this.properties.name]) {
             this.menu.radios[this.properties.name] = {
-              ball: eye("div", { class: "handy-radio-button-mark" }),
+              ball: eye("<div>", { class: "handy-radio-button-mark" }),
             };
             head.append(this.menu.radios[this.properties.name].ball);
           }
 
           if (this.properties.default === true) head.append(this.menu.radios[this.properties.name].ball);
           onclick = function () {
-            let call = _this.radios[_this.properties.name];
+            let call = _this.menu.radios[_this.properties.name];
             if (call.ball) head.append(call.ball);
             if (!(_this.func(_this.label, _this) === false))
               _this.menu.close();
@@ -193,7 +194,7 @@ class JButton {
           bodyAccel.text("definition");
 
           // mousenter => show definition
-          mouseenter = function () {
+          onmouseenter = function () {
             let b = this.getBoundingClientRect();
             let x = b.left + b.width + 5,
               y = b.top;
@@ -206,7 +207,7 @@ class JButton {
           };
 
           // mouseleave => hide definition
-          mouseleave = () => defBloc.css("display", "none");
+          onmouseleave = () => defBloc.css("display", "none");
 
 
           break;
@@ -214,38 +215,38 @@ class JButton {
           ///////////////////////////////////// SLIDER
           btn.class("+handy-slider");
           bodyAccel.class("+handy-slider-btns");
-          let decrease = eye("div", {
+          let decrease = eye("<div>", {
             class: "handy-slider-btn",
-            parent: bodyAccel,
           });
-          let show = eye("div", {
+          bodyAccel.append(decrease)
+          let show = eye("<div>", {
             class: "handy-slider-show",
-            parent: bodyAccel,
           });
-          let increase = eye("div", {
+          bodyAccel.append(show)
+          let increase = eye("<div>", {
             class: "handy-slider-btn",
-            parent: bodyAccel,
           });
+          bodyAccel.append(increase)
 
           // the plus and minus icons
-          let minus = eye("div", { class: "handy-minus", parent: decrease });
-          let incrs = eye("div", { class: "handy-plus1", parent: increase });
-          let decrs = eye("div", { class: "handy-plus2", parent: increase });
+          let minus = eye("<div>", { class: "handy-minus", parent: decrease });
+          let incrs = eye("<div>", { class: "handy-plus1", parent: increase });
+          let decrs = eye("<div>", { class: "handy-plus2", parent: increase });
 
           show.data("value", this.properties.default || this.properties.range[0]);
           show.text(this.properties.format.replace("_value_", show.data("value")));
 
           // actual work
           decrease.click(function () {
-            if(!_this.#state) return;
-            show.data("value", Math.max(show.data("value") - step, this.properties.range[0]));
-            show.text(this.properties.format.replace("_value_", show.data("value")));
+            if (!_this.#state) return;
+            show.data("value", Math.max(show.data("value") - _this.properties.step, _this.properties.range[0]));
+            show.text(_this.properties.format.replace("_value_", show.data("value")));
             _this.func(show.data("value"), _this);
           });
           increase.click(function () {
-            if(!_this.#state) return;
-            show.data("value", Math.min(show.data("value") + step, this.properties.range[1]));
-            show.text(this.properties.format.replace("_value_", show.data("value")));
+            if (!_this.#state) return;
+            show.data("value", Math.min(show.data("value") + _this.properties.step, _this.properties.range[1]));
+            show.text(_this.properties.format.replace("_value_", show.data("value")));
             _this.func(show.data("value"), _this);
           });
 
@@ -265,12 +266,12 @@ class JButton {
             parent: this,
             stickto: btn,
           });
-          this.submenus.push(submenuElm);
+          this.menu.submenus.push(submenuElm);
 
           // mouseenter => open submenu
           onmouseenter = function () {
             this.tm = setTimeout(function () {
-              let p = tail.getBoundingClientRect();
+              let p = tail.compute();
               // lock current menu
               submenuElm.popup({ x: p.left + p.width - 3, y: p.top });
             }, 500);
@@ -297,6 +298,8 @@ class JButton {
         }
       })
 
+
+      if(this.properties.disabled) this.disable();
     }
   }
 
@@ -361,54 +364,54 @@ let namelssCounter = 0;
 /**
  * Creates and handle context menu with ease
  * @author Yousef Neji
- * @param {Array<buttonDef>} def
  */
-function Jmenu(def) {
+class Jmenu {
+
   /**
    * Defintion object
    * @type {Array<buttonDef>}
    */
-  this.def = def;
+  def = null;
 
   /**
    * Properties of the menu
    * @type {menuProperties}
    */
-  this.props = {};
+  props = {};
 
   /**
    * Flag determines whether menu is opened or not
    * @type {boolean}
    */
-  this.on = false;
+  on = false;
 
   /**
    * Actual html menu element
    * @type {HTMLDivElement}
    */
-  this.elm = null;
+  elm = null;
 
   /**
    * Target is the element that supposed to launch/popup the menu
    * @type {HTMLElement}
    */
-  this.target = window;
+  target = window;
 
   /**
    * Reference to the radio elements used
    */
-  this.radios = {};
+  radios = {};
 
   /**
    * Reference to the submenus elements used
    * @type {Array<Jmenu>}
    */
-  this.submenus = [];
+  submenus = [];
 
   /**
    * Values auto detected to configure the menu, please don't modify it otherwise menu we appear as expected
    */
-  this.computed = {
+  computed = {
     menuHeight: 0,
     menuWidth: 0,
     parent: null,
@@ -418,15 +421,16 @@ function Jmenu(def) {
    * Used to prevent user interactions while menu opened
    * @type {import("eyeejs").EyeElement}
    */
-  this.untouchable = null;
-}
+  untouchable = null;
 
-Jmenu.prototype = {
   /**
-   * Initiation phase
+   * @param {Array<buttonDef>} def
    * @param {menuProperties} props
    */
-  init: function (props) {
+  constructor(def, props) {
+
+    this.def = def;
+
     if (!props) props = {};
     let {
       target = window,
@@ -450,7 +454,7 @@ Jmenu.prototype = {
 
     if (parent) this.untouchable = parent.untouchable;
     else {
-      this.untouchable = eye("div", {
+      this.untouchable = eye("<div>", {
         class: "handy-untouchable",
         parent: document.body,
       });
@@ -461,12 +465,13 @@ Jmenu.prototype = {
 
     this.create();
     this.bindEvents();
-    this.compute();
-  },
+    this.#compute();
+  }
+
   /**
    * Bind different events
    */
-  bindEvents: function () {
+  bindEvents() {
     let actions = (this.props.action ?? "contextmenu").split(" ");
     let _this = this;
 
@@ -476,12 +481,13 @@ Jmenu.prototype = {
         _this.popup({ x: e.clientX, y: e.clientY });
       });
     });
-  },
+  }
+
   /**
    * Create the menu
    */
-  create: function () {
-    let elm = eye("div", {
+  create() {
+    let elm = eye("<div>", {
       class: ["handy-menu", "unselect"],
       parent: document.body,
     }),
@@ -506,92 +512,22 @@ Jmenu.prototype = {
     this.def.forEach((button) => {
       _this.addButton(button);
     });
-  },
+  }
+
   /**
    * Add new button to the menu
    * @param {buttonDef} button
    */
-  addButton: function (button) {
+  addButton(button) {
     let btn = new JButton(this, button);
-    // let type = (button.type = button.type ?? "button"),
-    //   label = (button.label = button.label ?? ""),
-    //   func = (button.func = button.func ?? hmNoop),
-    //   accelerator = (button.accelerator = button.accelerator ?? ""),
-    //   name = (button.name = button.name ?? ""),
-    //   deflt = (button.default = button.default ?? null),
-    //   submenu = (button.submenu = button.submenu ?? null),
-    //   range = (button.range = button.range ?? [0, 100]),
-    //   step = (button.step = button.step ?? 1),
-    //   format = (button.format = button.format ?? "_value_"),
-    //   icon = (button.icon = button.icon ?? null),
-    //   disabled = (button.disabled = button.disabled ?? false),
-    //   definition = (button.def = button.def ?? ""),
-    //   _this = this,
-    //   spacing = this.props.spacing,
-    //   wheel = this.props.wheel ?? true,
-    //   head = null,
-    //   body = null,
-    //   tail = null,
-    //   checkBoxMark = null,
-    //   elm = null;
-
-    // // attaching some accelerators
-    // if (accelerator)
-    //   qway.bind(accelerator, function () {
-    //     elm.click();
-    //   });
-
-    // if (type === "separator") {
-    //   // separators have special designs
-    //   templates.separator({
-    //     parent: this.elm,
-    //     _label: label,
-    //   });
-    // } else {
-    //   elm = templates.normal({
-    //     parent: this.elm,
-    //     _label: label,
-    //     _accelerator: accelerator,
-    //   });
-    //   elm.data("definition", button);
-    //   // for other buttons they are generally made of some parts
-    //   let fSpace = Array.isArray(spacing) ? spacing[0] : spacing,
-    //     lSpace = Array.isArray(spacing) ? spacing[1] : spacing;
-
-    //   head = elm.child(0);
-    //   body = elm.child(1);
-    //   tail = elm.child(2);
-
-    //   // applying some style
-    //   head
-    //     .css("width", `${fSpace}px`)
-    //     .css("backgroundImage", icon ? `url(${icon})` : "");
-    //   tail.css("width", `${lSpace}px`);
-
-    //   let bodyLabel = body.child(0);
-    //   let bodyAccel = body.child(1);
-    //   let submenuElm = null;
-
-    //   // special button configurations
-
-    //   /////////////////// sub menu configurations
-
-    //   if (disabled === true) {
-    //     elm.css("background-color", "transparent");
-    //     elm.css("color", "gray");
-    //     elm.css("pointer-action", "none");
-    //     elm.css("cursor", "default");
-    //   }
-    // }
-
-  },
+  }
   /**
    *
    * @param {Object} pos the position in which to popup in
    * @param {number} pos.x x coordination
    * @param {number} pos.y y coordination
    */
-  popup: function (pos) {
+  popup(pos) {
     let { x, y } = pos;
     let stickto = this.props.stickto;
 
@@ -638,13 +574,13 @@ Jmenu.prototype = {
     this.elm.css("position", "fixed");
     this.elm.css("display", "inline-block");
     this.untouchable.show("inline-block");
-  },
+  }
   /**
    * Close the menu
    * @param {boolean} closeAllMenu
    * @returns
    */
-  close: function (closeAllMenu) {
+  close(closeAllMenu) {
     if (closeAllMenu && this.computed.parent)
       return this.computed.parent.close(true); // this will start closing the total menu
 
@@ -653,12 +589,12 @@ Jmenu.prototype = {
     }
     this.elm.css("display", "none");
     if (!this.computed.parent) this.untouchable.hide();
-  },
+  }
   /**
    * Perform some computation tasks registering some values
    * @method HandyeMenue#compute
    */
-  compute: function () {
+  #compute() {
     // perform some need calculations
 
     // away from the screen
@@ -666,32 +602,32 @@ Jmenu.prototype = {
     this.elm.css("position", "fixed");
     this.elm.css("display", "inline-block");
 
-    let declaration = this.elm.getBoundingClientRect();
+    let declaration = this.elm.compute();
     this.computed.menuHeight = declaration.height;
     this.computed.menuWidth = declaration.width;
 
     this.elm.css("display", "none");
-  },
+  }
   /**
    * Hide the button at the give index
    * @param {number} index
    */
-  hideButton: function (index) {
+  hideButton(index) {
     if (this.elm.child(index)) this.elm.child(index).hide();
-  },
+  }
   /**
    * Show the button at the give index
    * @param {number} index
    */
-  showButton: function (index) {
+  showButton(index) {
     if (this.elm.child(index)) this.elm.child(index).show();
-  },
+  }
   /**
    * Toggle button activation
    * @param {number} index
    * @param {boolean} force
    */
-  toggleButton: function (index, force) {
+  toggleButton(index, force) {
     if (this.elm.child(index)) {
       let button = this.elm.child(index);
       if (typeof force != "boolean") {
@@ -709,8 +645,8 @@ Jmenu.prototype = {
         button.removeAttribute("style");
       }
     }
-  },
-};
+  }
+}
 
 /**
  * Create a new context menu
@@ -720,8 +656,7 @@ Jmenu.prototype = {
  */
 function handy(def, props) {
   if (!def) throw new Error("Menu definiton must be provided!");
-  let menu = new Jmenu(def);
-  menu.init(props);
+  let menu = new Jmenu(def, props);
 
   return menu;
 }

@@ -45,7 +45,7 @@
     "rollup": "^4.43.0"
   },
   "dependencies": {
-    "eyeejs": "^2.1.0",
-    "qway": "^2.0.1"
+    "eyeejs": "^5.0.0",
+    "qway": "^3.2.0"
   }
 }
