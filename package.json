@@ -1,5 +1,5 @@
 {
-  "name": "jmenu",
+  "name": "jmenujs",
   "version": "3.0.0",
   "description": "a library that create and manage contextmenu with ease",
   "main": "./src/jmenu.js",
