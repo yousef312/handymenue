@@ -98,8 +98,36 @@ menu.hideButton(index);
 // show it back again
 menu.showButton(index);
 
-menu.
+// enable button working
+menu.enableButton(index);
 
+// disable button working
+menu.disableButton(index);
+
+// modify button props
+menu.setButtonProp(index, prop, value);
+menu.setButtonProp(0, "label", "New Label");
+menu.setButtonProp(0, "icon", "url(./img/icon1.png)");
+menu.setButtonProp(0, "accelerator", "Ctrl+shift+c");
+menu.setButtonProp(0, "value", 20); // for sliders
+menu.setButtonProp(0, "definition", "..... new definition of dishwasher"); // for definitions
+
+```
+
+ - You can also listen to event by
+```javascript
+
+menu.on("open",function(ev){
+  ev.which // the clicked element
+  ev.menu // access the menu from here
+})
+
+menu.on("close", function(ev){
+  // close event
+})
+
+// or trigger certain event 
+menu.trigger("open");
 ```
 
 ### Buttons Types
